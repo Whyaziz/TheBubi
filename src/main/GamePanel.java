@@ -42,7 +42,10 @@ public class GamePanel  extends JPanel implements Runnable {
     public final int titleScreen = 1;
     public final int regulationScreen = 2;
     public final int playerOneScreen = 3;
-    public final int playerTwoScreen = 4;
+    public final int transisi = 4;
+    public final int playerTwoScreen = 5;
+    public final int perbandingan = 6;
+    public final int endGame = 7;
 
 
 
@@ -52,6 +55,7 @@ public class GamePanel  extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addMouseListener(mouseListener);
         this.addMouseMotionListener(mouseListener);
+        this.setCursor(customCursor);
         this.setFocusable(true);
     }
 
@@ -104,9 +108,31 @@ public class GamePanel  extends JPanel implements Runnable {
         if (gameState == playerOneScreen){
             pig.update();
             dog.update();
+            ui.update();
             axe.update();
+
+            if (ui.timer == 0 || ui.health == 0){
+                gameState = transisi;
+                ui.pOneScore = ui.score;
+                ui.setDefault();
+            }
+        }
+        if (gameState == playerTwoScreen){
+            pig.update();
+            dog.update();
+            ui.update();
+            axe.update();
+
+            if (ui.timer == 0 || ui.health == 0){
+                gameState = perbandingan;
+                ui.pTwoScore = ui.score;
+                ui.setDefault();
+            }
         }
 
+        if (gameState == playerOneScreen || gameState == playerTwoScreen){
+
+        }
     }
 
     @Override
@@ -122,9 +148,8 @@ public class GamePanel  extends JPanel implements Runnable {
             background.drawRegulation(g2);
         }
 
-        if (gameState == playerOneScreen){
+        if (gameState == playerOneScreen || gameState == playerTwoScreen || gameState == transisi){
             background.draw(g2);
-            this.setCursor(customCursor);
 
             pig.draw(g2);
             dog.draw(g2);
@@ -137,8 +162,18 @@ public class GamePanel  extends JPanel implements Runnable {
 
             ui.drawScore(g2);
             ui.drawHealth(g2);
+            ui.drawTimer(g2);
 
             axe.draw(g2);
+        }
+        if (gameState == transisi){
+            ui.drawTransisi(g2);
+        }
+        if (gameState == perbandingan){
+            background.drawPerbandingan(g2);
+        }
+        if (gameState == endGame){
+            background.drawEnd(g2);
         }
 
 

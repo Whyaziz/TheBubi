@@ -11,13 +11,21 @@ public class Ui {
 
     GamePanel gamePanel;
     public int score;
-    public int health = 3;
+    public int health = 4;
+    int counter = 0;
+    int timer = 30;
+    public int pOneScore,pTwoScore;
 
     BufferedImage coin,healthImg;
 
     public Ui(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         getImage();
+    }
+    public void setDefault(){
+        timer = 30;
+        score = 0;
+        health = 4;
     }
 
     public void getImage(){
@@ -27,6 +35,14 @@ public class Ui {
         }
         catch (IOException e){
             e.printStackTrace();
+        }
+    }
+
+    public void update(){
+        counter ++;
+        if (counter >= 60 && timer > 0){
+            timer--;
+            counter = 0;
         }
     }
 
@@ -52,6 +68,17 @@ public class Ui {
             g2.drawImage(healthImg,80, gamePanel.screenHeight-120,40,40,null);
             g2.drawImage(healthImg,120, gamePanel.screenHeight-120,40,40,null);
         }
+    }
+
+    public void drawTimer(Graphics2D g2){
+        g2.drawString(timer+"S", 20, 50);
+    }
+
+    public void drawTransisi(Graphics2D g2) {
+        g2.drawString("Giliran Selesai",gamePanel.screenWidth/2,gamePanel.screenHeight/2);
+    }
+    public void drawEnd(Graphics2D g2) {
+        g2.drawString("Giliran Selesai",gamePanel.screenWidth/2,gamePanel.screenHeight/2);
     }
 
 }
