@@ -55,7 +55,6 @@ public class GamePanel  extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addMouseListener(mouseListener);
         this.addMouseMotionListener(mouseListener);
-        this.setCursor(customCursor);
         this.setFocusable(true);
     }
 
@@ -131,7 +130,10 @@ public class GamePanel  extends JPanel implements Runnable {
         }
 
         if (gameState == playerOneScreen || gameState == playerTwoScreen){
-
+            this.setCursor(customCursor);
+        }
+        else {
+            this.setCursor(Cursor.getDefaultCursor());
         }
     }
 
