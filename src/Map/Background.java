@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Background{
 
     GamePanel gamePanel;
-    BufferedImage map1;
+    BufferedImage map1, titleScreen, regulationScreen;
 
     public Background(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -22,6 +22,8 @@ public class Background{
     public void getImage(){
         try {
             map1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/background/Background.png")));
+            titleScreen = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/background/Mulai.png")));
+            regulationScreen = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/background/Peraturan.png")));
         }
         catch (IOException e){
             e.printStackTrace();
@@ -29,6 +31,8 @@ public class Background{
     }
 
     public void draw(Graphics2D g2){
-        g2.drawImage(map1,0,0,1125,750,null);
+        g2.drawImage(map1,0,0,gamePanel.screenWidth, gamePanel.screenHeight, null);
     }
+    public void drawMulai(Graphics2D g2){g2.drawImage(titleScreen,0,0,gamePanel.screenWidth, gamePanel.screenHeight, null);}
+    public void drawRegulation(Graphics2D g2){g2.drawImage(regulationScreen,0,0,gamePanel.screenWidth, gamePanel.screenHeight, null);}
 }

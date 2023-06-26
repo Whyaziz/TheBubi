@@ -11,13 +11,14 @@ import java.awt.*;
 
 public class GamePanel  extends JPanel implements Runnable {
 
-    final int screenWidth = 1125;
-    final int screenHeight = 750;
-    final int screenCol = 15;
-    final int screenRow = 10;
-    Thread gameThread;
+    //ukuran layar dan fps
+    public final int screenWidth = 1125;
+    public final int screenHeight = 750;
     final int fps = 60;
 
+    Thread gameThread;
+
+    //inisiasi Objek
     ObjectSetter objectSetter = new ObjectSetter(this);
     public MouseListener mouseListener = new MouseListener(this);
     CollisionChecker collisionChecker = new CollisionChecker(this);
@@ -30,9 +31,19 @@ public class GamePanel  extends JPanel implements Runnable {
     Axe axe = new Axe(this);
 
 
+    //cursor trasparant
     Toolkit toolkit = Toolkit.getDefaultToolkit();
     Image cursorImage = toolkit.getImage("ui/blank.png");
     Cursor customCursor = toolkit.createCustomCursor(cursorImage, new java.awt.Point(0, 0), "Custom Cursor");
+
+    //gameState
+
+    int gameState = 1;
+    public final int titleScreen = 1;
+    public final int regulationScreen = 2;
+    public final int playerOneScreen = 3;
+    public final int playerTwoScreen = 4;
+
 
 
     public GamePanel(){
@@ -42,7 +53,6 @@ public class GamePanel  extends JPanel implements Runnable {
         this.addMouseListener(mouseListener);
         this.addMouseMotionListener(mouseListener);
         this.setFocusable(true);
-        this.setCursor(customCursor);
     }
 
     public void setUpGame(){
@@ -91,9 +101,11 @@ public class GamePanel  extends JPanel implements Runnable {
 
     public void update(){
 
-        pig.update();
-        dog.update();
-        axe.update();
+        if (gameState == playerOneScreen){
+            pig.update();
+            dog.update();
+            axe.update();
+        }
 
     }
 
@@ -102,21 +114,32 @@ public class GamePanel  extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
-        background.draw(g2);
 
-        pig.draw(g2);
-        dog.draw(g2);
-
-        for (Bush bush : bushes) {
-            if (!(bush==null)){
-                bush.draw(g2);
-            }
+        if (gameState == titleScreen){
+            background.drawMulai(g2);
+        }
+        if (gameState == regulationScreen){
+            background.drawRegulation(g2);
         }
 
-        ui.drawScore(g2);
-        ui.drawHealth(g2);
+        if (gameState == playerOneScreen){
+            background.draw(g2);
+            this.setCursor(customCursor);
 
-        axe.draw(g2);
+            pig.draw(g2);
+            dog.draw(g2);
+
+            for (Bush bush : bushes) {
+                if (!(bush==null)){
+                    bush.draw(g2);
+                }
+            }
+
+            ui.drawScore(g2);
+            ui.drawHealth(g2);
+
+            axe.draw(g2);
+        }
 
 
 

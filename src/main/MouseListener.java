@@ -23,30 +23,37 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
     public void mousePressed(MouseEvent e) {
         int button = e.getButton();
 
-        if (button == MouseEvent.BUTTON1){
-            click = true;
-            System.out.println("klik");
+        if (gamePanel.gameState == gamePanel.titleScreen || gamePanel.gameState == gamePanel.regulationScreen){
+            gamePanel.gameState += 1;
+        }
 
-            if (gamePanel.collisionChecker.checkPig(gamePanel.axe)){
-                gamePanel.ui.score ++;
-                gamePanel.dog.counter = 79;
-                gamePanel.pig.counter = 79;
-            }
-            if (gamePanel.collisionChecker.checkDog(gamePanel.axe)){
-                gamePanel.ui.health --;
-                gamePanel.dog.counter = 79;
-                gamePanel.pig.counter = 79;
-            }
+        if (gamePanel.gameState == gamePanel.playerOneScreen){
+            if (button == MouseEvent.BUTTON1){
+                click = true;
 
+                if (gamePanel.collisionChecker.checkPig(gamePanel.axe) && !gamePanel.collisionChecker.checkDog(gamePanel.axe)){
+                    gamePanel.ui.score ++;
+                    gamePanel.dog.counter = 79;
+                    gamePanel.pig.counter = 79;
+                }
+                if (gamePanel.collisionChecker.checkDog(gamePanel.axe)){
+                    gamePanel.ui.health --;
+                    gamePanel.dog.counter = 79;
+                    gamePanel.pig.counter = 79;
+                }
+
+            }
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         int button = e.getButton();
-        if (button == MouseEvent.BUTTON1){
-            click = false;
-            System.out.println("lepas");
+
+        if (gamePanel.gameState == gamePanel.playerOneScreen){
+            if (button == MouseEvent.BUTTON1){
+                click = false;
+            }
         }
     }
 
@@ -67,10 +74,12 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        int currentX = e.getX();
-        int currentY = e.getY();
+        if (gamePanel.gameState == gamePanel.playerOneScreen){
+            int currentX = e.getX();
+            int currentY = e.getY();
 
-        mouseX = currentX;
-        mouseY = currentY;
+            mouseX = currentX;
+            mouseY = currentY;
+        }
     }
 }
