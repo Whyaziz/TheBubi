@@ -23,6 +23,10 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
     public void mousePressed(MouseEvent e) {
         int button = e.getButton();
 
+        if (gamePanel.gameState == gamePanel.endGame){
+            gamePanel.gameState = 1;
+        }
+
         if (gamePanel.gameState == gamePanel.titleScreen ||
                 gamePanel.gameState == gamePanel.regulationScreen ||
                 gamePanel.gameState == gamePanel.transisi ||

@@ -25,7 +25,12 @@ public class Ui {
     public void setDefault(){
         timer = 30;
         score = 0;
-        health = 4;
+        if (gamePanel.collisionChecker.checkDog(gamePanel.axe)){
+            health = 4;
+        }
+        else {
+            health = 3;
+        }
     }
 
     public void getImage(){
@@ -71,14 +76,34 @@ public class Ui {
     }
 
     public void drawTimer(Graphics2D g2){
+        Font font = new Font("Arial",Font.PLAIN,40);
+        g2.setFont(font);
+        g2.setColor(Color.white);
+
         g2.drawString(timer+"S", 20, 50);
     }
 
     public void drawTransisi(Graphics2D g2) {
-        g2.drawString("Giliran Selesai",gamePanel.screenWidth/2,gamePanel.screenHeight/2);
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0,0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        Font font = new Font("Arial",Font.PLAIN,40);
+        g2.setFont(font);
+        g2.setColor(Color.white);
+
+        g2.drawString("GILIRAN SELESAI",gamePanel.screenWidth/2 - 135,gamePanel.screenHeight/2);
     }
-    public void drawEnd(Graphics2D g2) {
-        g2.drawString("Giliran Selesai",gamePanel.screenWidth/2,gamePanel.screenHeight/2);
+    public void drawPlayer(Graphics2D g2) {
+        Font font = new Font("Arial",Font.PLAIN,40);
+        g2.setFont(font);
+        g2.setColor(Color.white);
+
+        if (gamePanel.gameState == gamePanel.playerOneScreen){
+            g2.drawString("Player 1",gamePanel.screenWidth/2 - 90,50);
+        }
+        if (gamePanel.gameState == gamePanel.playerTwoScreen){
+            g2.drawString("Player 2",gamePanel.screenWidth/2 - 90,50);
+        }
     }
 
 }

@@ -165,6 +165,7 @@ public class GamePanel  extends JPanel implements Runnable {
             ui.drawScore(g2);
             ui.drawHealth(g2);
             ui.drawTimer(g2);
+            ui.drawPlayer(g2);
 
             axe.draw(g2);
         }
