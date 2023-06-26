@@ -32,12 +32,20 @@ public class Axe extends SuperObject{
 
         solidArea.x = gamePanel.mouseListener.mouseX+10;
         solidArea.y = gamePanel.mouseListener.mouseY+10;
+
+        if (gamePanel.mouseListener.click){
+            image = kapak2;
+        }
+        else {
+            image = kapak1;
+        }
     }
 
     @Override
     public void getImage() {
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/weapon/kapak1.png")));
+            kapak1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/weapon/kapak1.png")));
+            kapak2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/weapon/kapak2.png")));
         }
         catch (IOException e){
             e.printStackTrace();

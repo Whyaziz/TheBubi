@@ -8,7 +8,7 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
     GamePanel gamePanel;
     public int mouseX;
     public int mouseY;
-    public boolean click = false;
+    public boolean click;
 
     public MouseListener(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -16,8 +16,17 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getX() > -1 && e.getY() > -1){
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        int button = e.getButton();
+
+        if (button == MouseEvent.BUTTON1){
             click = true;
+            System.out.println("klik");
+
             if (gamePanel.collisionChecker.checkPig(gamePanel.axe)){
                 gamePanel.ui.score ++;
                 gamePanel.dog.counter = 79;
@@ -28,18 +37,16 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
                 gamePanel.dog.counter = 79;
                 gamePanel.pig.counter = 79;
             }
+
         }
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.getX() > -1 && e.getY() > -1){
+        int button = e.getButton();
+        if (button == MouseEvent.BUTTON1){
             click = false;
+            System.out.println("lepas");
         }
     }
 
@@ -62,11 +69,6 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
     public void mouseMoved(MouseEvent e) {
         int currentX = e.getX();
         int currentY = e.getY();
-
-        if (mouseX != 0 && mouseY != 0) {
-            int deltaX = currentX - mouseX;
-            int deltaY = currentY - mouseY;
-        }
 
         mouseX = currentX;
         mouseY = currentY;

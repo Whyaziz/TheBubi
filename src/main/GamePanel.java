@@ -29,6 +29,12 @@ public class GamePanel  extends JPanel implements Runnable {
     public Pig pig = new Pig(this);
     Axe axe = new Axe(this);
 
+
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Image cursorImage = toolkit.getImage("ui/blank.png");
+    Cursor customCursor = toolkit.createCustomCursor(cursorImage, new java.awt.Point(0, 0), "Custom Cursor");
+
+
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
         this.setBackground(Color.BLACK);
@@ -36,6 +42,7 @@ public class GamePanel  extends JPanel implements Runnable {
         this.addMouseListener(mouseListener);
         this.addMouseMotionListener(mouseListener);
         this.setFocusable(true);
+        this.setCursor(customCursor);
     }
 
     public void setUpGame(){
@@ -75,9 +82,6 @@ public class GamePanel  extends JPanel implements Runnable {
 
             if (timer >= 1000000000){ //akan menghitung berapa kali perulangan terjadi selama 1 detik
                 System.out.println("FPS : "+paintcount);
-                if (collisionChecker.checkPig(axe)){
-                    System.out.println("touched");
-                }
                 paintcount = 0; //mereset hitungan perulangan
                 timer = 0; //mereset timer
             }
@@ -90,6 +94,7 @@ public class GamePanel  extends JPanel implements Runnable {
         pig.update();
         dog.update();
         axe.update();
+
     }
 
     @Override

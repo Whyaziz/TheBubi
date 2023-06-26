@@ -5,7 +5,8 @@ import java.awt.image.BufferedImage;
 
 public abstract class SuperObject {
 
-    BufferedImage image;
+    public BufferedImage image;
+    public BufferedImage kapak1,kapak2;
     public int x;
     public int y;
 
