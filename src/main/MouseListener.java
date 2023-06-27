@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
@@ -9,6 +10,7 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
     public int mouseX;
     public int mouseY;
     public boolean click;
+
 
     public MouseListener(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -23,15 +25,19 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
     public void mousePressed(MouseEvent e) {
         int button = e.getButton();
 
-        if (gamePanel.gameState == gamePanel.endGame){
-            gamePanel.gameState = 1;
-        }
-
-        if (gamePanel.gameState == gamePanel.titleScreen ||
+        if (
+                gamePanel.gameState == gamePanel.titleScreen ||
                 gamePanel.gameState == gamePanel.regulationScreen ||
                 gamePanel.gameState == gamePanel.transisi ||
-                gamePanel.gameState == gamePanel.perbandingan){
+                gamePanel.gameState == gamePanel.perbandingan ||
+                gamePanel.gameState == gamePanel.endGame ||
+                (gamePanel.gameState == gamePanel.giliranOne && gamePanel.ui.hooverPlay) ||
+                (gamePanel.gameState == gamePanel.giliranTwo && gamePanel.ui.hooverPlay)
+        ){
             gamePanel.gameState += 1;
+            if (gamePanel.gameState > 9){
+                gamePanel.gameState = gamePanel.titleScreen;
+            }
         }
 
         if (gamePanel.gameState == gamePanel.playerOneScreen || gamePanel.gameState == gamePanel.playerTwoScreen){
@@ -57,7 +63,7 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
     public void mouseReleased(MouseEvent e) {
         int button = e.getButton();
 
-        if (gamePanel.gameState == gamePanel.playerOneScreen){
+        if (gamePanel.gameState == gamePanel.playerOneScreen || gamePanel.gameState == gamePanel.playerTwoScreen){
             if (button == MouseEvent.BUTTON1){
                 click = false;
             }
@@ -81,7 +87,12 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        if (gamePanel.gameState == gamePanel.playerOneScreen || gamePanel.gameState == gamePanel.playerTwoScreen){
+        if (
+                gamePanel.gameState == gamePanel.playerOneScreen ||
+                gamePanel.gameState == gamePanel.playerTwoScreen ||
+                gamePanel.gameState == gamePanel.giliranOne ||
+                gamePanel.gameState == gamePanel.giliranTwo)
+        {
             int currentX = e.getX();
             int currentY = e.getY();
 

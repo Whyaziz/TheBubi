@@ -10,8 +10,8 @@ public class Entity {
 
     GamePanel gamePanel;
     BufferedImage image;
-    int width = 114;
-    int height = 114;
+    int width = 100;
+    int height = 100;
 
     public Rectangle solidArea;
 
@@ -75,8 +75,8 @@ public class Entity {
             solidArea.x = 80;
             solidArea.y = 350;
         }
-        g2.setColor(Color.red);
-        g2.draw(solidArea);
+//        g2.setColor(Color.red);
+//        g2.draw(solidArea);
     }
 
 

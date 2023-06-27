@@ -41,11 +41,13 @@ public class GamePanel  extends JPanel implements Runnable {
     int gameState = 1;
     public final int titleScreen = 1;
     public final int regulationScreen = 2;
-    public final int playerOneScreen = 3;
-    public final int transisi = 4;
-    public final int playerTwoScreen = 5;
-    public final int perbandingan = 6;
-    public final int endGame = 7;
+    public final int giliranOne = 3;
+    public final int playerOneScreen = 4;
+    public final int transisi = 5;
+    public final int giliranTwo = 6;
+    public final int playerTwoScreen = 7;
+    public final int perbandingan = 8;
+    public final int endGame = 9;
 
 
 
@@ -135,6 +137,11 @@ public class GamePanel  extends JPanel implements Runnable {
         else {
             this.setCursor(Cursor.getDefaultCursor());
         }
+
+        ui.hooverPlay = mouseListener.mouseX >= screenWidth / 2 - 100 &&
+                mouseListener.mouseX <= screenWidth / 2 + 100 &&
+                mouseListener.mouseY >= screenHeight / 2 &&
+                mouseListener.mouseY <= screenHeight / 2 + 100;
     }
 
     @Override
@@ -150,7 +157,11 @@ public class GamePanel  extends JPanel implements Runnable {
             background.drawRegulation(g2);
         }
 
-        if (gameState == playerOneScreen || gameState == playerTwoScreen || gameState == transisi){
+        if (gameState == giliranOne ||
+                gameState == playerOneScreen ||
+                gameState == playerTwoScreen ||
+                gameState == transisi ||
+                gameState == giliranTwo){
             background.draw(g2);
 
             pig.draw(g2);
@@ -168,6 +179,12 @@ public class GamePanel  extends JPanel implements Runnable {
             ui.drawPlayer(g2);
 
             axe.draw(g2);
+        }
+        if (gameState == giliranOne){
+            ui.drawButton(g2);
+        }
+        if (gameState == giliranTwo){
+            ui.drawButton(g2);
         }
         if (gameState == transisi){
             ui.drawTransisi(g2);

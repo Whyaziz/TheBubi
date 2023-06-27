@@ -16,7 +16,10 @@ public class Ui {
     int timer = 30;
     public int pOneScore,pTwoScore;
 
-    BufferedImage coin,healthImg;
+    BufferedImage coin,healthImg,button;
+    boolean hooverPlay;
+
+
 
     public Ui(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -37,6 +40,7 @@ public class Ui {
         try {
             coin = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/ui/Coins.png")));
             healthImg = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/ui/nyawa.png")));
+            button = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/ui/playButton.png")));
         }
         catch (IOException e){
             e.printStackTrace();
@@ -62,16 +66,16 @@ public class Ui {
 
     public void drawHealth(Graphics2D g2){
         if (health == 1){
-            g2.drawImage(healthImg,40, gamePanel.screenHeight-120,40,40,null);
+            g2.drawImage(healthImg,40, gamePanel.screenHeight-60,40,40,null);
         }
         if (health == 2){
-            g2.drawImage(healthImg,40, gamePanel.screenHeight-120,40,40,null);
-            g2.drawImage(healthImg,80, gamePanel.screenHeight-120,40,40,null);
+            g2.drawImage(healthImg,40, gamePanel.screenHeight-60,40,40,null);
+            g2.drawImage(healthImg,80, gamePanel.screenHeight-60,40,40,null);
         }
         if (health == 3){
-            g2.drawImage(healthImg,40, gamePanel.screenHeight-120,40,40,null);
-            g2.drawImage(healthImg,80, gamePanel.screenHeight-120,40,40,null);
-            g2.drawImage(healthImg,120, gamePanel.screenHeight-120,40,40,null);
+            g2.drawImage(healthImg,40, gamePanel.screenHeight-60,40,40,null);
+            g2.drawImage(healthImg,80, gamePanel.screenHeight-60,40,40,null);
+            g2.drawImage(healthImg,120, gamePanel.screenHeight-60,40,40,null);
         }
     }
 
@@ -91,8 +95,9 @@ public class Ui {
         g2.setFont(font);
         g2.setColor(Color.white);
 
-        g2.drawString("GILIRAN SELESAI",gamePanel.screenWidth/2 - 135,gamePanel.screenHeight/2);
+        g2.drawString("GILIRAN SELESAI",gamePanel.screenWidth/2 - 145,gamePanel.screenHeight/2);
     }
+
     public void drawPlayer(Graphics2D g2) {
         Font font = new Font("Arial",Font.PLAIN,40);
         g2.setFont(font);
@@ -104,6 +109,34 @@ public class Ui {
         if (gamePanel.gameState == gamePanel.playerTwoScreen){
             g2.drawString("Player 2",gamePanel.screenWidth/2 - 90,50);
         }
+    }
+
+    public void drawButton(Graphics2D g2){
+        String p1 = "Player 1";
+        String p2 = "Player 2";
+
+
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0,0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        Font font = new Font("Arial",Font.PLAIN,40);
+        g2.setFont(font);
+        g2.setColor(Color.white);
+
+        if (gamePanel.gameState == gamePanel.giliranOne){
+            g2.drawString(p1,gamePanel.screenWidth/2 - 65,gamePanel.screenHeight/4);
+        }
+        if (gamePanel.gameState == gamePanel.giliranTwo){
+            g2.drawString(p2,gamePanel.screenWidth/2 - 65,gamePanel.screenHeight/4);
+        }
+
+        if (hooverPlay){
+            g2.drawImage(button,gamePanel.screenWidth/2-100, gamePanel.screenHeight/2+5,null);
+        }
+        else {
+            g2.drawImage(button,gamePanel.screenWidth/2-100, gamePanel.screenHeight/2,null);
+        }
+
     }
 
 }
