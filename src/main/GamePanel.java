@@ -5,6 +5,7 @@ import entity.Dog;
 import entity.Pig;
 import object.Axe;
 import object.Bush;
+import sound.SoundEffect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,7 @@ public class GamePanel  extends JPanel implements Runnable {
     public Dog dog = new Dog(this);
     public Pig pig = new Pig(this);
     Axe axe = new Axe(this);
+    SoundEffect soundEffect = new SoundEffect(this);
 
 
     //cursor trasparant

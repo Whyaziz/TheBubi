@@ -43,14 +43,17 @@ public class MouseListener implements java.awt.event.MouseListener, MouseMotionL
         if (gamePanel.gameState == gamePanel.playerOneScreen || gamePanel.gameState == gamePanel.playerTwoScreen){
             if (button == MouseEvent.BUTTON1){
                 click = true;
+                gamePanel.soundEffect.playAxe();
 
                 if (gamePanel.collisionChecker.checkPig(gamePanel.axe) && !gamePanel.collisionChecker.checkDog(gamePanel.axe)){
                     gamePanel.ui.score ++;
+                    gamePanel.soundEffect.playPig();
                     gamePanel.dog.counter = 79;
                     gamePanel.pig.counter = 79;
                 }
                 if (gamePanel.collisionChecker.checkDog(gamePanel.axe)){
                     gamePanel.ui.health --;
+                    gamePanel.soundEffect.playDog();
                     gamePanel.dog.counter = 79;
                     gamePanel.pig.counter = 79;
                 }
