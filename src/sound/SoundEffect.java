@@ -43,25 +43,16 @@ public class SoundEffect {
     }
 
     public void playAxe() {
-        if (axeClip.isRunning()) {
-            axeClip.stop();
-        }
         axeClip.setFramePosition(0);
         axeClip.start();
     }
 
     public void playDog() {
-        if (dogClip.isRunning()) {
-            dogClip.stop();
-        }
         dogClip.setFramePosition(0);
         dogClip.start();
     }
 
     public void playPig() {
-        if (pigClip.isRunning()) {
-            pigClip.stop();
-        }
         pigClip.setFramePosition(0);
         pigClip.start();
     }
