@@ -11,21 +11,13 @@ public class CollisionChecker {
     }
 
     public Boolean checkPig(Axe axe) {
-        Boolean touched = false;
 
-        if (axe.solidArea.intersects(gamePanel.pig.solidArea)){
-            touched = true;
-        }
-        return touched;
+        return axe.solidArea.intersects(gamePanel.pig.solidArea);
     }
 
     public Boolean checkDog(Axe axe){
-        Boolean touched = false;
 
-        if (axe.solidArea.intersects(gamePanel.dog.solidArea)){
-            touched = true;
-        }
-        return touched;
+        return axe.solidArea.intersects(gamePanel.dog.solidArea);
     }
 
 

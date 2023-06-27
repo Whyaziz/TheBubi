@@ -75,8 +75,7 @@ public class Entity {
             solidArea.x = 80;
             solidArea.y = 350;
         }
-//        g2.setColor(Color.red);
-//        g2.draw(solidArea);
+
     }
 
 

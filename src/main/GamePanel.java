@@ -74,7 +74,7 @@ public class GamePanel  extends JPanel implements Runnable {
     @Override
     public void run() {
 
-        double paintInterval = 1_000_000_000 /fps;
+        double paintInterval = 1_000_000_000.0 /fps;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;

@@ -54,7 +54,5 @@ public class Axe extends SuperObject{
 
     public void draw(Graphics2D g2){
         g2.drawImage(image,x,y,width,height,null);
-//        g2.setColor(Color.red);
-//        g2.draw(solidArea);
     }
 }
